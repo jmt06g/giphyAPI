@@ -26,15 +26,33 @@ function createButton() {
 }
 createButton();
 
-$("#all-buttons").on("click", function(){
+$(document).on("click",".btn", function(){
 
-  var queryURL ="";
-  
+  var queryURL ="https://api.giphy.com/v1/gifs/search?api_key=3RSCCCxAWatg3VcFb5frCs85vo6Wc2iV&q="+$(this).attr("data-name");
+  $("#animals").empty();
   $.ajax({
     url: queryURL,
     method: "GET"
+  }).then(function(response){
+    for (var i=0; i < response.data.length; i++) {
+//adding images to the div
+      var image = $("<img>")
+      $("#animals").append("<img src=\""+response.data[i].images.original.url+"\">")
+    }
+console.log(response);
+
   })
-  //here i think i use the api info and call the query?
+
+  $(document).on("click", "submit", function(){
+    
+  }
+
+)
+  
+  //create a new button when user inputs
+  //.val get value
+  //add vaulue
+  //call function
 }
 
 
